@@ -1,4 +1,5 @@
 import 'package:bcvapp/src/models/cardmodel.dart';
+import 'package:bcvapp/src/ui/screens/calculator.dart';
 import 'package:bcvapp/src/ui/widgets/balanceHome.dart';
 import 'package:bcvapp/src/ui/widgets/cardMenu.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         return SizedBox(
                             width: 180,
                             child: ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  switch (index) {
+                                    case 1:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const CalculatorPage()));
+                                  }
+                                },
                                 title: CardDesign(
                                   card: cards[index],
                                 )));
