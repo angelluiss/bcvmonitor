@@ -1,4 +1,5 @@
 import 'package:bcvapp/src/models/covid_model.dart';
+import 'package:bcvapp/src/models/login_model.dart';
 import 'api_provider.dart';
 
 class ApiRepository {
@@ -6,6 +7,10 @@ class ApiRepository {
 
   Future<CovidModel> fetchCovidList() {
     return _provider.fetchCovidList();
+  }
+
+  Future<LoginModel> loginBCVMonitor() {
+    return _provider.loginBCVMonitor();
   }
 }
 

@@ -24,7 +24,7 @@ class CovidBloc extends Bloc<CovidEvent, CovidState> {
         yield const CovidLoading();
         final mList = await _apiRepository.fetchCovidList();
         yield CovidLoaded(mList);
-        yield CovidError(mList.error);
+        if (mList.error != null) yield CovidError(mList.error);
       } on NetworkError {
         yield const CovidError("Failed to fetch data. is your device online?");
       }

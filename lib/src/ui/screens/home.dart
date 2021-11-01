@@ -1,6 +1,7 @@
 import 'package:bcvapp/src/models/cardmodel.dart';
 import 'package:bcvapp/src/ui/screens/calculator.dart';
 import 'package:bcvapp/src/ui/screens/covid_info.dart';
+import 'package:bcvapp/src/ui/screens/splash.dart';
 import 'package:bcvapp/src/ui/widgets/balanceHome.dart';
 import 'package:bcvapp/src/ui/widgets/cardMenu.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: ListTile(
                                 onTap: () {
                                   switch (index) {
+                                    case 0:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SplashPage()));
+                                      break;
                                     case 1:
                                       Navigator.push(
                                           context,

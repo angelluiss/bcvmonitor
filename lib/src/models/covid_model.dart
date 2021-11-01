@@ -16,7 +16,7 @@ class CovidModel {
     if (json['Countries'] != null) {
       countries = <Countries>[];
       json['Countries'].forEach((v) {
-        countries.add(new Countries.fromJson(v));
+        countries.add(Countries.fromJson(v));
       });
     }
     date = json['Date'];
@@ -24,13 +24,9 @@ class CovidModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.global != null) {
-      data['Global'] = this.global.toJson();
-    }
-    if (this.countries != null) {
-      data['Countries'] = this.countries.map((v) => v.toJson()).toList();
-    }
-    data['Date'] = this.date;
+    data['Global'] = global.toJson();
+    data['Countries'] = countries.map((v) => v.toJson()).toList();
+    data['Date'] = date;
     return data;
   }
 }
@@ -62,12 +58,12 @@ class Global {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['NewConfirmed'] = this.newConfirmed;
-    data['TotalConfirmed'] = this.totalConfirmed;
-    data['NewDeaths'] = this.newDeaths;
-    data['TotalDeaths'] = this.totalDeaths;
-    data['NewRecovered'] = this.newRecovered;
-    data['TotalRecovered'] = this.totalRecovered;
+    data['NewConfirmed'] = newConfirmed;
+    data['TotalConfirmed'] = totalConfirmed;
+    data['NewDeaths'] = newDeaths;
+    data['TotalDeaths'] = totalDeaths;
+    data['NewRecovered'] = newRecovered;
+    data['TotalRecovered'] = totalRecovered;
     return data;
   }
 }
@@ -111,16 +107,16 @@ class Countries {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Country'] = this.country;
-    data['CountryCode'] = this.countryCode;
-    data['Slug'] = this.slug;
-    data['NewConfirmed'] = this.newConfirmed;
-    data['TotalConfirmed'] = this.totalConfirmed;
-    data['NewDeaths'] = this.newDeaths;
-    data['TotalDeaths'] = this.totalDeaths;
-    data['NewRecovered'] = this.newRecovered;
-    data['TotalRecovered'] = this.totalRecovered;
-    data['Date'] = this.date;
+    data['Country'] = country;
+    data['CountryCode'] = countryCode;
+    data['Slug'] = slug;
+    data['NewConfirmed'] = newConfirmed;
+    data['TotalConfirmed'] = totalConfirmed;
+    data['NewDeaths'] = newDeaths;
+    data['TotalDeaths'] = totalDeaths;
+    data['NewRecovered'] = newRecovered;
+    data['TotalRecovered'] = totalRecovered;
+    data['Date'] = date;
     return data;
   }
 }
