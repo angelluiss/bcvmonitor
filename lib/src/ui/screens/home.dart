@@ -1,5 +1,6 @@
 import 'package:bcvapp/src/models/cardmodel.dart';
 import 'package:bcvapp/src/ui/screens/calculator.dart';
+import 'package:bcvapp/src/ui/screens/covid_info.dart';
 import 'package:bcvapp/src/ui/widgets/balanceHome.dart';
 import 'package:bcvapp/src/ui/widgets/cardMenu.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   const CalculatorPage()));
+                                      break;
+                                    case 2:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CovidPage()));
                                   }
                                 },
                                 title: CardDesign(

@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   charts_flutter: ^0.11.0
   blobs:  ^2.0.0
+  flutter_bloc: ^7.3.1
+  equatable: ^2.0.3
+  dio: ^4.0.1
+  liquid_progress_indicator: ^0.4.0
 
 dev_dependencies:
   flutter_test:

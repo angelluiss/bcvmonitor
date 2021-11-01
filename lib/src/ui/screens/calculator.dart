@@ -1,5 +1,4 @@
 import 'package:bcvapp/src/models/cardmodel.dart';
-import 'package:bcvapp/src/ui/widgets/balanceHome.dart';
 import 'package:bcvapp/src/ui/widgets/cardMenu.dart';
 import 'package:flutter/material.dart';
 
