@@ -1,4 +1,3 @@
-import 'package:bcvapp/src/ui/screens/home.dart';
 import 'package:bcvapp/src/ui/screens/splash.dart';
 import 'package:flutter/material.dart';
 

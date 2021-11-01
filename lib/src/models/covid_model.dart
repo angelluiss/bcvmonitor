@@ -23,7 +23,7 @@ class CovidModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['Global'] = global.toJson();
     data['Countries'] = countries.map((v) => v.toJson()).toList();
     data['Date'] = date;
@@ -57,7 +57,7 @@ class Global {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['NewConfirmed'] = newConfirmed;
     data['TotalConfirmed'] = totalConfirmed;
     data['NewDeaths'] = newDeaths;
@@ -106,7 +106,7 @@ class Countries {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['Country'] = country;
     data['CountryCode'] = countryCode;
     data['Slug'] = slug;

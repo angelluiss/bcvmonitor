@@ -11,13 +11,13 @@ class BalanceModel {
     if (json['resp'] != null) {
       resp = <Resp>[];
       json['resp'].forEach((v) {
-        resp.add(new Resp.fromJson(v));
+        resp.add(Resp.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['ok'] = ok;
     if (resp != null) {
       data['resp'] = resp.map((v) => v.toJson()).toList();
@@ -49,7 +49,7 @@ class Resp {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['name'] = name;
     data['country'] = country;
     data['valuedate'] = valuedate;

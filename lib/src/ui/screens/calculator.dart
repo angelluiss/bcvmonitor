@@ -119,6 +119,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                                         color: Colors.white, fontSize: 30),
                                     controller: myControllerUSD,
                                     onChanged: (text) {
+                                      // ignore: avoid_print
                                       print("First text field: $text");
                                     },
                                   ),

@@ -12,10 +12,10 @@ class USDBalanceModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ok'] = this.ok;
-    if (this.resp != null) {
-      data['resp'] = this.resp.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['ok'] = ok;
+    if (resp != null) {
+      data['resp'] = resp.toJson();
     }
     return data;
   }
@@ -44,12 +44,12 @@ class Resp {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['country'] = this.country;
-    data['valuedate'] = this.valuedate;
-    data['valuebuy'] = this.valuebuy;
-    data['valuesale'] = this.valuesale;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['name'] = name;
+    data['country'] = country;
+    data['valuedate'] = valuedate;
+    data['valuebuy'] = valuebuy;
+    data['valuesale'] = valuesale;
     return data;
   }
 }

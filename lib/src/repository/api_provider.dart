@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:bcvapp/src/models/balance_model.dart';
 import 'package:bcvapp/src/models/covid_model.dart';
 import 'package:bcvapp/src/models/login_model.dart';
@@ -17,7 +19,6 @@ class ApiProvider {
       Response response = await _dio.get(_url);
       return CovidModel.fromJson(response.data);
     } catch (error, stacktrace) {
-      // ignore: avoid_print
       print("Exception occured: $error stackTrace: $stacktrace");
       return CovidModel.withError("Data not found / Connection issue");
     }
@@ -27,10 +28,10 @@ class ApiProvider {
     dynamic body = {'email': 'monitor02@thinkering.com', 'password': '1234'};
     try {
       Response response = await _dio.post(_urlBCV + _loginEndPoint, data: body);
+
       print(response.data);
       return LoginModel.fromJson(response.data);
     } catch (error, stacktrace) {
-      // ignore: avoid_print
       print("Exception occured: $error stackTrace: $stacktrace");
       return LoginModel.withError("Data not found / Connection issue");
     }
@@ -44,7 +45,6 @@ class ApiProvider {
       print(response.data);
       return BalanceModel.fromJson(response.data);
     } catch (error, stacktrace) {
-      // ignore: avoid_print
       print("Exception occured: $error stackTrace: $stacktrace");
       return BalanceModel.withError("Data not found / Connection issue");
     }
@@ -60,7 +60,6 @@ class ApiProvider {
       print(response.data);
       return USDBalanceModel.fromJson(response.data);
     } catch (error, stacktrace) {
-      // ignore: avoid_print
       print("Exception occured: $error stackTrace: $stacktrace");
       return USDBalanceModel.withError("Data not found / Connection issue");
     }
@@ -76,7 +75,6 @@ class ApiProvider {
       print(response.data);
       return USDBalanceModel.fromJson(response.data);
     } catch (error, stacktrace) {
-      // ignore: avoid_print
       print("Exception occured: $error stackTrace: $stacktrace");
       return USDBalanceModel.withError("Data not found / Connection issue");
     }

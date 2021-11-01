@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CovidPage extends StatefulWidget {
+  const CovidPage({Key? key}) : super(key: key);
+
   @override
   _CovidPageState createState() => _CovidPageState();
 }
@@ -20,14 +22,17 @@ class _CovidPageState extends State<CovidPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('COVID-19 List')),
+      appBar: AppBar(
+        title: const Text('COVID-19 List'),
+        backgroundColor: Colors.black54,
+      ),
       body: _buildListCovid(),
     );
   }
 
   Widget _buildListCovid() {
     return Container(
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       child: BlocProvider(
         create: (_) => _newsBloc,
         child: BlocListener<CovidBloc, CovidState>(
@@ -64,10 +69,10 @@ class _CovidPageState extends State<CovidPage> {
       itemCount: model.countries.length,
       itemBuilder: (context, index) {
         return Container(
-          margin: EdgeInsets.all(8.0),
+          margin: const EdgeInsets.all(8.0),
           child: Card(
             child: Container(
-              margin: EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
                   Text("Country: ${model.countries[index].country}"),
@@ -85,5 +90,5 @@ class _CovidPageState extends State<CovidPage> {
     );
   }
 
-  Widget _buildLoading() => Center(child: CircularProgressIndicator());
+  Widget _buildLoading() => const Center(child: CircularProgressIndicator());
 }
