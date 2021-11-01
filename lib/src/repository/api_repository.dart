@@ -1,5 +1,7 @@
+import 'package:bcvapp/src/models/balance_model.dart';
 import 'package:bcvapp/src/models/covid_model.dart';
 import 'package:bcvapp/src/models/login_model.dart';
+import 'package:bcvapp/src/models/usd_balance_model.dart';
 import 'api_provider.dart';
 
 class ApiRepository {
@@ -11,6 +13,18 @@ class ApiRepository {
 
   Future<LoginModel> loginBCVMonitor() {
     return _provider.loginBCVMonitor();
+  }
+
+  Future<BalanceModel> getBalanceBCVMonitor() {
+    return _provider.getBalanceMonitor();
+  }
+
+  Future<USDBalanceModel> getUSDBCVMonitor() {
+    return _provider.getUSDMonitor();
+  }
+
+  Future<USDBalanceModel> getEURBCVMonitor() {
+    return _provider.getEURMonitor();
   }
 }
 
