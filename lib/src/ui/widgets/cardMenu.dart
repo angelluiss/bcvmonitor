@@ -1,8 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:bcvapp/src/models/cardmodel.dart';
-import 'package:bcvapp/src/utils/constants.dart';
-import 'package:blobs/blobs.dart';
 
 import 'package:flutter/material.dart';
 

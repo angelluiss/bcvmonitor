@@ -14,12 +14,12 @@ import 'package:loading_animations/loading_animations.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
-class BalanceHome extends StatelessWidget {
+class BalanceHomeSell extends StatelessWidget {
   final CardData card;
   final ApiRepository _apiRepository = ApiRepository();
   DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
 
-  BalanceHome({Key? key, required this.card}) : super(key: key);
+  BalanceHomeSell({Key? key, required this.card}) : super(key: key);
 
   List<charts.Series<DeveloperSeries, num>> series = [
     charts.Series(
@@ -85,10 +85,13 @@ class BalanceHome extends StatelessWidget {
                             "\$",
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
-                          Text(
-                            " ${snapshot.data!.resp.valuebuy.toStringAsFixed(2)} Bs.D ",
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 30),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "${snapshot.data!.resp.valuesale.toStringAsFixed(2)} Bs.D ",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 30),
+                            ),
                           ),
                         ],
                       ),
@@ -114,7 +117,7 @@ class BalanceHome extends StatelessWidget {
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
                           Text(
-                            " ${snapshot.data!.resp.valuebuy.toStringAsFixed(2)} Bs.D ",
+                            " ${snapshot.data!.resp.valuesale.toStringAsFixed(2)} Bs.D ",
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 30),
                           ),
@@ -134,11 +137,6 @@ class BalanceHome extends StatelessWidget {
                   if (snapshot.hasData) {
                     var temp = DateTime.parse(
                         snapshot.data!.resp.valuedate.toString());
-                    var color = snapshot.data!.resp.growthValueBuy
-                            .toString()
-                            .contains("-")
-                        ? Colors.redAccent
-                        : Colors.greenAccent;
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -150,18 +148,17 @@ class BalanceHome extends StatelessWidget {
                                 color: Colors.white, fontSize: 16),
                           ),
                         ),
-                        Icon(
-                            snapshot.data!.resp.growthValueBuy
-                                    .toString()
-                                    .contains("-")
-                                ? Icons.arrow_drop_down
-                                : Icons.arrow_drop_up,
-                            color: color),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            "${snapshot.data!.resp.growthValueSale.toStringAsFixed(2).replaceAll("-", "")} %",
-                            style: TextStyle(color: color, fontSize: 16),
+                            "${snapshot.data!.resp.growthValueSale.toStringAsFixed(2)} %",
+                            style: TextStyle(
+                                color: snapshot.data!.resp.growthValueSale
+                                        .toString()
+                                        .contains("-")
+                                    ? Colors.redAccent
+                                    : Colors.greenAccent,
+                                fontSize: 16),
                           ),
                         ),
                       ],

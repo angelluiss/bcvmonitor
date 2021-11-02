@@ -3,6 +3,7 @@ import 'package:bcvapp/src/ui/screens/calculator.dart';
 import 'package:bcvapp/src/ui/screens/covid_info.dart';
 import 'package:bcvapp/src/ui/screens/splash.dart';
 import 'package:bcvapp/src/ui/widgets/balanceHome.dart';
+import 'package:bcvapp/src/ui/widgets/balanceHomeSell.dart';
 import 'package:bcvapp/src/ui/widgets/cardMenu.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: TabBarView(
                     children: [
                       BalanceHome(card: cards[1]),
-                      BalanceHome(card: cards[1]),
+                      BalanceHomeSell(card: cards[1]),
                     ],
                   ),
                 ),

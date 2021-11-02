@@ -7,7 +7,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 class DeveloperChart extends StatelessWidget {
   final List<DeveloperSeries> data;
 
-  DeveloperChart({Key? key, required this.data}) : super(key: key);
+  const DeveloperChart({Key? key, required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     List<charts.Series<DeveloperSeries, num>> series = [

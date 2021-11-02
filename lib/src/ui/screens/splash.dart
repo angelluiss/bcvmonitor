@@ -1,6 +1,4 @@
 import 'package:bcvapp/src/blocs/bcvmonitor/login_bloc/login_bloc.dart';
-import 'package:bcvapp/src/blocs/covid/covid_bloc.dart';
-import 'package:bcvapp/src/models/covid_model.dart';
 import 'package:bcvapp/src/models/login_model.dart';
 import 'package:bcvapp/src/ui/screens/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 class SplashPage extends StatefulWidget {
+  const SplashPage({Key? key}) : super(key: key);
+
   @override
   _SplashPageState createState() => _SplashPageState();
 }
@@ -37,6 +37,7 @@ class _SplashPageState extends State<SplashPage> {
         child: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginError) {
+              // ignore: deprecated_member_use
               Scaffold.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message),
@@ -61,7 +62,7 @@ class _SplashPageState extends State<SplashPage> {
                   child: _buildLoading('Verificando'),
                 );
               } else if (state is LoginError) {
-                return Center(child: Text("Error"));
+                return const Center(child: Text("Error"));
               }
               return const CircularProgressIndicator();
             },
@@ -85,7 +86,8 @@ class _SplashPageState extends State<SplashPage> {
               ),
               Text(
                 'Bienvenido ${model.usuario.name}',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ],
           )),
@@ -93,12 +95,12 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Widget _buildLoading(String status) => Center(
-          child: Container(
+          child: SizedBox(
         width: 200,
         height: 200,
         child: LiquidCircularProgressIndicator(
           value: 0.75, // Defaults to 0.5.
-          valueColor: AlwaysStoppedAnimation(
+          valueColor: const AlwaysStoppedAnimation(
               Colors.black), // Defaults to the current Theme's accentColor.
           backgroundColor: Colors
               .white24, // Defaults to the current Theme's backgroundColor.
@@ -108,7 +110,7 @@ class _SplashPageState extends State<SplashPage> {
               .vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.vertical.
           center: Text(
             status,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ));
@@ -116,7 +118,7 @@ class _SplashPageState extends State<SplashPage> {
   void _toHomePage(BuildContext context, int time) async {
     Future.delayed(Duration(seconds: time), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => MyHomePage()));
+          context, MaterialPageRoute(builder: (_) => const MyHomePage()));
     });
   }
 }
