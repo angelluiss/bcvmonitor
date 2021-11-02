@@ -46,14 +46,14 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
               BCVPreferences.setStringValue(
                   keyPreferenceUSDBuy, e.valuebuy.toString()),
               BCVPreferences.setStringValue(
-                  keyPreferenceUSDSell, e.valuebuy.toString())
+                  keyPreferenceUSDSell, e.valuesale.toString())
             }
           else if (e.name.contains('EUR'))
             {
               BCVPreferences.setStringValue(
                   keyPreferenceEURBuy, e.valuebuy.toString()),
               BCVPreferences.setStringValue(
-                  keyPreferenceEURSell, e.valuebuy.toString())
+                  keyPreferenceEURSell, e.valuesale.toString())
             }
         });
   }

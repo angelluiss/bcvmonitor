@@ -1,5 +1,7 @@
 import 'package:bcvapp/src/models/cardmodel.dart';
 import 'package:bcvapp/src/ui/widgets/cardMenu.dart';
+import 'package:bcvapp/src/utils/constants.dart';
+import 'package:bcvapp/src/utils/share_preferences.dart';
 import 'package:flutter/material.dart';
 
 class CalculatorPage extends StatefulWidget {
@@ -10,21 +12,58 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-  final myControllerBSD = TextEditingController(text: "4,12");
-  final myControllerUSD = TextEditingController(text: "1,00");
+  final myControllerBSD = TextEditingController(text: "4.12");
+  final myControllerUSD = TextEditingController(text: "1.00");
+  var usdvalue;
 
   @override
   void initState() {
     super.initState();
-    myControllerBSD.addListener(_printLatestValue);
+
+    _obtainvalue();
   }
 
-  _printLatestValue() {
-    print("Second text field: ${myControllerBSD.text}");
-
-    setState(() {
-      myControllerUSD.text = myControllerBSD.text;
+  _obtainvalue() async {
+    BCVPreferences.getStringValue(keyPreferenceUSDBuy).then((value) {
+      setState(() {
+        usdvalue = value;
+        myControllerBSD.text = usdvalue.toString();
+        myControllerUSD.addListener(_convertTousd);
+        // myControllerBSD.addListener(_convertTobsd);
+      });
     });
+  }
+
+  _convertTousd() {
+    print("Second text field: ${myControllerBSD.text}");
+    if (myControllerUSD.text != '') {
+      var valueusd = double.parse(myControllerUSD.text.replaceAll(",", ".")) *
+          double.parse(usdvalue);
+
+      setState(() {
+        myControllerBSD.text = valueusd.toStringAsFixed(2);
+      });
+    } else {
+      setState(() {
+        myControllerBSD.text = "0";
+      });
+    }
+  }
+
+  _convertTobsd() {
+    print("Second text field: ${myControllerBSD.text}");
+    if (myControllerBSD.text != '') {
+      var valueusd =
+          double.parse(myControllerBSD.text) / double.parse(usdvalue);
+
+      setState(() {
+        myControllerUSD.text = valueusd.toStringAsFixed(2);
+      });
+    } else {
+      setState(() {
+        myControllerUSD.text = "0";
+      });
+    }
   }
 
   @override
@@ -67,7 +106,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  "Bs.D",
+                                  "USD",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 16),
                                 ),
@@ -77,10 +116,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
                                 child: SizedBox(
                                   width: 200,
                                   child: TextField(
+                                    keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 30),
-                                    controller: myControllerBSD,
+                                    controller: myControllerUSD,
                                     onChanged: (text) {
                                       print("First text field: $text");
                                     },
@@ -104,7 +144,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  "USD",
+                                  "Bs.D",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 16),
                                 ),
@@ -114,10 +154,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
                                 child: SizedBox(
                                   width: 200,
                                   child: TextField(
+                                    keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 30),
-                                    controller: myControllerUSD,
+                                    controller: myControllerBSD,
                                     onChanged: (text) {
                                       // ignore: avoid_print
                                       print("First text field: $text");

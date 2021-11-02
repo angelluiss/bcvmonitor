@@ -5,6 +5,8 @@ import 'package:bcvapp/src/models/seriesModel.dart';
 import 'package:bcvapp/src/models/usd_balance_model.dart';
 import 'package:bcvapp/src/repository/api_repository.dart';
 import 'package:bcvapp/src/ui/widgets/linechartwidget.dart';
+import 'package:bcvapp/src/utils/constants.dart';
+import 'package:bcvapp/src/utils/share_preferences.dart';
 
 import 'package:flutter/material.dart';
 
@@ -76,6 +78,7 @@ class BalanceHome extends StatelessWidget {
                 builder: (BuildContext ctx,
                     AsyncSnapshot<USDBalanceModel> snapshot) {
                   if (snapshot.hasData) {
+                    _saveIntoPreference(snapshot.data!);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -179,5 +182,12 @@ class BalanceHome extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _saveIntoPreference(USDBalanceModel data) {
+    BCVPreferences.setStringValue(
+        keyPreferenceUSDBuy, data.resp.valuebuy.toString());
+    BCVPreferences.setStringValue(
+        keyPreferenceUSDSell, data.resp.valuesale.toString());
   }
 }

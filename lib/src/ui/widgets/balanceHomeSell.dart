@@ -137,6 +137,11 @@ class BalanceHomeSell extends StatelessWidget {
                   if (snapshot.hasData) {
                     var temp = DateTime.parse(
                         snapshot.data!.resp.valuedate.toString());
+                    var color = snapshot.data!.resp.growthValueBuy
+                            .toString()
+                            .contains("-")
+                        ? Colors.redAccent
+                        : Colors.greenAccent;
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -148,17 +153,18 @@ class BalanceHomeSell extends StatelessWidget {
                                 color: Colors.white, fontSize: 16),
                           ),
                         ),
+                        Icon(
+                            snapshot.data!.resp.growthValueBuy
+                                    .toString()
+                                    .contains("-")
+                                ? Icons.arrow_drop_down
+                                : Icons.arrow_drop_up,
+                            color: color),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            "${snapshot.data!.resp.growthValueSale.toStringAsFixed(2)} %",
-                            style: TextStyle(
-                                color: snapshot.data!.resp.growthValueSale
-                                        .toString()
-                                        .contains("-")
-                                    ? Colors.redAccent
-                                    : Colors.greenAccent,
-                                fontSize: 16),
+                            "${snapshot.data!.resp.growthValueSale.toStringAsFixed(2).replaceAll("-", "")} %",
+                            style: TextStyle(color: color, fontSize: 16),
                           ),
                         ),
                       ],
