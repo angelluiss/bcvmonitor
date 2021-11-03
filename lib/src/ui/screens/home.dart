@@ -1,6 +1,7 @@
 import 'package:bcvapp/src/models/cardmodel.dart';
 import 'package:bcvapp/src/ui/screens/calculator.dart';
 import 'package:bcvapp/src/ui/screens/covid_info.dart';
+import 'package:bcvapp/src/ui/screens/list_currencies.dart';
 import 'package:bcvapp/src/ui/screens/splash.dart';
 import 'package:bcvapp/src/ui/widgets/balanceHome.dart';
 import 'package:bcvapp/src/ui/widgets/balanceHomeSell.dart';
@@ -20,20 +21,34 @@ class _MyHomePageState extends State<MyHomePage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: const Color(0xFF000000),
-          bottom: const TabBar(
-            indicatorColor: Colors.white,
-            tabs: [
-              Tab(text: "Compra"),
-              Tab(text: "Venta"),
-            ],
-          ),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: TabBar(
+                    indicatorWeight: 1,
+                    indicatorPadding: EdgeInsets.all(4),
+                    indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey,
+                    ),
+                    tabs: [
+                      Tab(text: "Compra"),
+                      Tab(text: "Venta"),
+                    ],
+                  ),
+                ),
+              ),
               Expanded(
                 flex: 2,
                 child: Container(
@@ -66,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  SplashPage()));
+                                                  const CurrencyList()));
                                       break;
                                     case 1:
                                       Navigator.push(

@@ -14,6 +14,7 @@ class CalculatorPage extends StatefulWidget {
 class _CalculatorPageState extends State<CalculatorPage> {
   final myControllerBSD = TextEditingController(text: "4.12");
   final myControllerUSD = TextEditingController(text: "1.00");
+  // ignore: prefer_typing_uninitialized_variables
   var usdvalue;
 
   @override
@@ -35,6 +36,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   _convertTousd() {
+    // ignore: avoid_print
     print("Second text field: ${myControllerBSD.text}");
     if (myControllerUSD.text != '') {
       var valueusd = double.parse(myControllerUSD.text.replaceAll(",", ".")) *
@@ -51,6 +53,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   _convertTobsd() {
+    // ignore: avoid_print
     print("Second text field: ${myControllerBSD.text}");
     if (myControllerBSD.text != '') {
       var valueusd =
@@ -118,7 +121,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                                   child: TextField(
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 30),
                                     controller: myControllerUSD,
                                     onChanged: (text) {
@@ -129,8 +132,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
                               )
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Icon(
                               Icons.swap_vert,
                               color: Colors.white,
@@ -156,7 +159,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                                   child: TextField(
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 30),
                                     controller: myControllerBSD,
                                     onChanged: (text) {

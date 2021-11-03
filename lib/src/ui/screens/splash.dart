@@ -1,6 +1,7 @@
 import 'package:bcvapp/src/blocs/bcvmonitor/login_bloc/login_bloc.dart';
 import 'package:bcvapp/src/models/login_model.dart';
 import 'package:bcvapp/src/ui/screens/home.dart';
+import 'package:bcvapp/src/widgets/circular_liquid_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,9 +49,9 @@ class _SplashPageState extends State<SplashPage> {
           child: BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
               if (state is LoginInitial) {
-                return _buildLoading('Iniciando app');
+                return CircularLiquidIndicator(status: 'Iniciando app');
               } else if (state is LoginLoading) {
-                return _buildLoading('Verificando usuario..');
+                return CircularLiquidIndicator(status: 'Verificando usuario..');
               } else if (state is LoginLoaded) {
                 _toHomePage(context, 2);
                 return _buildCard(context, state.loginModel);
@@ -59,7 +60,7 @@ class _SplashPageState extends State<SplashPage> {
                 // Navigator.push(
                 //     context, MaterialPageRoute(builder: (_) => MyHomePage()));
                 return Container(
-                  child: _buildLoading('Verificando'),
+                  child: CircularLiquidIndicator(status: 'Verificando'),
                 );
               } else if (state is LoginError) {
                 return const Center(child: Text("Error"));
@@ -93,27 +94,6 @@ class _SplashPageState extends State<SplashPage> {
           )),
     );
   }
-
-  Widget _buildLoading(String status) => Center(
-          child: SizedBox(
-        width: 200,
-        height: 200,
-        child: LiquidCircularProgressIndicator(
-          value: 0.75, // Defaults to 0.5.
-          valueColor: const AlwaysStoppedAnimation(
-              Colors.black), // Defaults to the current Theme's accentColor.
-          backgroundColor: Colors
-              .white24, // Defaults to the current Theme's backgroundColor.
-          borderColor: Colors.white54,
-          borderWidth: 5.0,
-          direction: Axis
-              .vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.vertical.
-          center: Text(
-            status,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-      ));
 
   void _toHomePage(BuildContext context, int time) async {
     Future.delayed(Duration(seconds: time), () {
