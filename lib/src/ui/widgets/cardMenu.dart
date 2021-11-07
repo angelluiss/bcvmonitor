@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:bcvapp/src/models/cardmodel.dart';
+import 'package:bcvapp/src/utils/constants.dart';
 
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class CardDesign extends StatelessWidget {
   final CardData card;
 
   const CardDesign({Key? key, required this.card}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -32,7 +34,7 @@ class CardDesign extends StatelessWidget {
                 child: Text(
                   card.number,
                   style: TextStyle(
-                      color: card.color == Colors.black
+                      color: card.color == primaryLightColor
                           ? Colors.white
                           : Colors.black),
                 )),
@@ -44,7 +46,7 @@ class CardDesign extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    color: card.color == Colors.black
+                    color: card.color == primaryLightColor
                         ? Colors.white
                         : Colors.black),
                 child: card.icon,

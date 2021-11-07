@@ -1,6 +1,7 @@
 import 'package:bcvapp/src/models/balance_model.dart';
 import 'package:bcvapp/src/models/covid_model.dart';
 import 'package:bcvapp/src/models/login_model.dart';
+import 'package:bcvapp/src/models/trends_model.dart';
 import 'package:bcvapp/src/models/usd_balance_model.dart';
 import 'api_provider.dart';
 
@@ -25,6 +26,11 @@ class ApiRepository {
 
   Future<USDBalanceModel> getEURBCVMonitor() {
     return _provider.getEURMonitor();
+  }
+
+  Future<TrendsModel> getTrends(
+      String startDate, String endDate, String currency, bool valuetype) {
+    return _provider.getTrends(startDate, endDate, currency, valuetype);
   }
 }
 

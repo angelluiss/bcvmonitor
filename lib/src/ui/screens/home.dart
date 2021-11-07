@@ -6,6 +6,7 @@ import 'package:bcvapp/src/ui/screens/splash.dart';
 import 'package:bcvapp/src/ui/widgets/balanceHome.dart';
 import 'package:bcvapp/src/ui/widgets/balanceHomeSell.dart';
 import 'package:bcvapp/src/ui/widgets/cardMenu.dart';
+import 'package:bcvapp/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -21,9 +22,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: primaryLightColor,
         appBar: AppBar(
-          backgroundColor: const Color(0xFF000000),
+          backgroundColor: primaryLightColor,
         ),
         body: Center(
           child: Column(
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                 flex: 2,
                 child: Container(
-                  decoration: const BoxDecoration(color: Colors.black),
+                  decoration: BoxDecoration(color: primaryLightColor),
                   child: TabBarView(
                     children: [
                       BalanceHome(card: cards[1]),

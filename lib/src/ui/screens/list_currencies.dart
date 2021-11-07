@@ -23,6 +23,7 @@ class _CurrencyListState extends State<CurrencyList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text('Monedas'),
         backgroundColor: Colors.black,
@@ -71,9 +72,13 @@ class _CurrencyListState extends State<CurrencyList> {
       itemBuilder: (context, index) {
         return Container(
           margin: const EdgeInsets.all(8.0),
-          child: Card(
-            child: Container(
-              margin: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(10)),
+            margin: const EdgeInsets.all(8.0),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -86,7 +91,9 @@ class _CurrencyListState extends State<CurrencyList> {
                           child: Text(
                             model.resp[index].name,
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ),
                         Padding(
@@ -94,7 +101,9 @@ class _CurrencyListState extends State<CurrencyList> {
                           child: Text(
                             model.resp[index].country,
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.normal),
+                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white),
                           ),
                         ),
                       ],

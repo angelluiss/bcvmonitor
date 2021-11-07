@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:bcvapp/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CardData {
@@ -22,7 +23,7 @@ List<CardData> cards = [
       balance: '23,532',
       date: '12/26',
       number: 'Tendencia',
-      color: Colors.black,
+      color: primaryLightColor,
       icon: const Icon(Icons.trending_up)),
   CardData(
       balance: '48,632',

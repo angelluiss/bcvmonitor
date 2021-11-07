@@ -60,10 +60,9 @@ class BalanceHomeSell extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Center(
-      child: Container(
-        width: size.width - 60,
+      child: SizedBox(
+        width: size.width,
         height: size.width - 60,
-        margin: const EdgeInsets.all(5),
         child: Column(
           children: [
             const Padding(
@@ -148,7 +147,11 @@ class BalanceHomeSell extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            temp.toLocal().toString(),
+                            temp.toLocal().day.toString() +
+                                "-" +
+                                temp.toLocal().month.toString() +
+                                "-" +
+                                temp.toLocal().year.toString(),
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 16),
                           ),
@@ -163,7 +166,7 @@ class BalanceHomeSell extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            "${snapshot.data!.resp.growthValueSale.toStringAsFixed(2).replaceAll("-", "")} %",
+                            "${double.parse(snapshot.data!.resp.growthValueSale).toStringAsFixed(2).replaceAll("-", "")} %",
                             style: TextStyle(color: color, fontSize: 16),
                           ),
                         ),
@@ -176,7 +179,7 @@ class BalanceHomeSell extends StatelessWidget {
                   );
                 }),
             Expanded(
-              child: StackedAreaLineChart(series, animate: true),
+              child: StackedAreaLineChart(animate: true),
             )
           ],
         ),

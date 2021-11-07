@@ -27,8 +27,8 @@ class Resp {
   late String valuedate;
   late double valuebuy;
   late double valuesale;
-  late double growthValueBuy;
-  late double growthValueSale;
+  late String growthValueBuy;
+  late String growthValueSale;
 
   Resp(
       {required this.name,
