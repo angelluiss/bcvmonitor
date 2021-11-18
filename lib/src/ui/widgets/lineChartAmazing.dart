@@ -1,16 +1,26 @@
 // ignore_for_file: file_names
 
+import 'package:bcvapp/src/blocs/bcvmonitor/trend_home_bloc/trend_bloc.dart';
 import 'package:bcvapp/src/ui/widgets/lineChartTittles.dart';
+import 'package:bcvapp/src/widgets/circular_liquid_indicator.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LineChartWidget extends StatelessWidget {
+class LineChartWidget extends StatefulWidget {
+  LineChartWidget({Key? key}) : super(key: key);
+
+  @override
+  State<LineChartWidget> createState() => _LineChartWidgetState();
+}
+
+class _LineChartWidgetState extends State<LineChartWidget> {
+  final TrendsBloc _newsBloc = TrendsBloc(const TrendsInitial());
+
   final List<Color> gradientColors = [
     const Color(0xff7FCC19),
     const Color(0xff6699D8),
   ];
-
-  LineChartWidget({Key? key}) : super(key: key);
 
   List<String> x = [
     "20/10/21 00:00:00 am",
@@ -41,56 +51,120 @@ class LineChartWidget extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) => LineChart(
-        LineChartData(
-          minX: 0,
-          maxX: 11,
-          minY: 0,
-          maxY: 6,
-          titlesData: LineTitles.getTitleData(),
-          gridData: FlGridData(
-            show: false,
-            getDrawingHorizontalLine: (value) {
-              return FlLine(
-                color: const Color(0xff37434d),
-                strokeWidth: 1,
+  void initState() {
+    _newsBloc.add(GetTrends());
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => BlocProvider(
+        create: (_) => _newsBloc,
+        child: BlocListener<TrendsBloc, TrendsState>(
+          listener: (context, state) {
+            if (state is TrendsError) {
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                ),
               );
-            },
-            drawVerticalLine: false,
-            getDrawingVerticalLine: (value) {
-              return FlLine(
-                color: const Color(0xff37434d),
-                strokeWidth: 1,
-              );
+            }
+          },
+          child: BlocBuilder<TrendsBloc, TrendsState>(
+            builder: (context, state) {
+              if (state is TrendsInitial) {
+                return _buildLoading();
+              } else if (state is TrendsLoading) {
+                return _buildLoading();
+              } else if (state is TrendsLoaded) {
+                return _linearChartAwesome(
+                    state.trendsModel.x, state.trendsModel.y);
+              } else if (state is TrendsError) {
+                return Text(state.message);
+              }
+              return const CircularProgressIndicator();
             },
           ),
-          borderData: FlBorderData(
-            show: false,
-            border: Border.all(color: const Color(0xff37434d), width: 1),
-          ),
-          lineBarsData: [
-            LineChartBarData(
-              spots: [
-                FlSpot(0, 3),
-                FlSpot(2.6, 2),
-                FlSpot(4.9, 5),
-                FlSpot(6.8, 2.5),
-                FlSpot(8, 4),
-                FlSpot(9.5, 3),
-                FlSpot(11, 4),
-              ],
-              isCurved: true,
-              colors: gradientColors,
-              barWidth: 5,
-              // dotData: FlDotData(show: false),
-              belowBarData: BarAreaData(
-                show: true,
-                colors: gradientColors
-                    .map((color) => color.withOpacity(0.5))
-                    .toList(),
-              ),
-            ),
-          ],
         ),
       );
+
+  _linearChartAwesome(List<String> x, List<double> y) {
+    List<FlSpot> points = [FlSpot(0, y[0])];
+    double index = 0;
+    for (var element in y) {
+      index += 1;
+
+      points.add(FlSpot(index, element));
+    }
+    print(points);
+
+    return LineChart(
+      LineChartData(
+        minX: 0,
+        maxX: x.length.toDouble(),
+        minY: _getMin(y),
+        maxY: _getMax(y),
+        titlesData: LineTitles.getTitleData(x, y),
+        gridData: FlGridData(
+          show: false,
+          getDrawingHorizontalLine: (value) {
+            return FlLine(
+              color: const Color(0xff37434d),
+              strokeWidth: 1,
+            );
+          },
+          drawVerticalLine: false,
+          getDrawingVerticalLine: (value) {
+            return FlLine(
+              color: const Color(0xff37434d),
+              strokeWidth: 1,
+            );
+          },
+        ),
+        borderData: FlBorderData(
+          show: false,
+          border: Border.all(color: const Color(0xff37434d), width: 1),
+        ),
+        lineBarsData: [
+          LineChartBarData(
+            spots: points,
+            isCurved: true,
+            colors: gradientColors,
+            barWidth: 5,
+            // dotData: FlDotData(show: false),
+            belowBarData: BarAreaData(
+              show: true,
+              colors: gradientColors
+                  .map((color) => color.withOpacity(0.5))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _getMax(List<double> y) {
+    double? max;
+    for (var element in y) {
+      if (max == null || element > max) {
+        max = element;
+      }
+    }
+    print("valox maximo $max");
+    return max;
+  }
+
+  _getMin(List<double> y) {
+    double? min;
+    for (var element in y) {
+      if (min == null || element < min) {
+        min = element;
+      }
+    }
+    print("valox minimo $min");
+    return min;
+  }
+
+  Widget _buildLoading() =>
+      Center(child: CircularLiquidIndicator(status: 'Verificando'));
 }

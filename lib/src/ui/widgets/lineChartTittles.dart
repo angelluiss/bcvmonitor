@@ -4,10 +4,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LineTitles {
-  static getTitleData() => FlTitlesData(
+  static getTitleData(List<String> x, List<double> y) => FlTitlesData(
       show: true,
-      topTitles: SideTitles(
-        showTitles: true,
+      topTitles: SideTitles(showTitles: false),
+      leftTitles: SideTitles(
+        showTitles: false,
         reservedSize: 35,
         getTextStyles: (context, value) => const TextStyle(
           color: Color(0xff68737d),
@@ -15,17 +16,13 @@ class LineTitles {
           fontSize: 16,
         ),
         getTitles: (value) {
-          switch (value.toInt()) {
-            case 2:
-              return '1';
-            case 5:
-              return '2';
-            case 8:
-              return '3';
-          }
-          return '';
+          return y[value.toInt()].toString();
+          // return DateTime.tryParse(x[value.toInt()]
+          //         .replaceAll(RegExp(r'(am|pm)$'), "")
+          //         .replaceAll("/", "-"))
+          //     .toString();
         },
-        margin: 8,
+        margin: x.length.toDouble(),
       ),
       bottomTitles: SideTitles(
         showTitles: true,
@@ -47,27 +44,6 @@ class LineTitles {
           return '';
         },
         margin: 8,
-      ),
-      leftTitles: SideTitles(
-        showTitles: false,
-        getTextStyles: (context, value) => const TextStyle(
-          color: Color(0xff67727d),
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-        getTitles: (value) {
-          switch (value.toInt()) {
-            case 1:
-              return '10k';
-            case 3:
-              return '30k';
-            case 5:
-              return '50k';
-          }
-          return '';
-        },
-        reservedSize: 35,
-        margin: 12,
       ),
       rightTitles: SideTitles(
         showTitles: false,
